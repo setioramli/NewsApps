@@ -1,0 +1,142 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.myapplication.newsapps"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        staging {
+            dimension "version"
+            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
+            resValue "string", "app_name", "News Apps"
+            applicationIdSuffix '.stage'
+            versionNameSuffix "-stage"
+        }
+
+        prod {
+            dimension "version"
+            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
+            resValue "string", "app_name", "News Apps"
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //Material Design
+    def material_version = "1.2.1"
+    implementation "com.google.android.material:material:$material_version"
+    //AppCompat
+    def appCombat_version = "1.2.0"
+    implementation "androidx.appcompat:appcompat:$appCombat_version"
+    //Ktx
+    def ktx_version = "1.3.2"
+    implementation "androidx.core:core-ktx:$ktx_version"
+    //ConstraintLayout
+    def constraint_version = "1.1.3"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+    //CardView
+    def cardView_version = "1.0.0"
+    implementation "androidx.cardview:cardview:$cardView_version"
+    //networking
+    def retrofit_version = '2.9.0'
+    def okHttp_version = '4.8.0'
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    implementation 'com.squareup.retrofit2:converter-jackson:2.1.0'
+    implementation 'com.fasterxml.jackson:jackson-parent:2.7'
+    //Lifecycle KTX
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
+
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    //timber for log
+    def timber_version = "4.7.1"
+    implementation "com.jakewharton.timber:timber:$timber_version"
+    //permission
+    def permission_version = "0.4.0"
+    implementation "com.github.quickpermissions:quickpermissions-kotlin:$permission_version"
+
+    //countryCodePicker
+    implementation 'com.github.joielechong:countrycodepicker:2.4.1'
+
+    //chucker
+    def chucker_version = '3.2.0'
+    debugImplementation "com.github.chuckerteam.chucker:library:$chucker_version"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chucker_version"
+
+    //Image Slider
+    implementation 'com.github.smarteist:autoimageslider:1.3.2'
+
+    //coil for image loader
+    def coil_version = "0.11.0"
+    implementation "io.coil-kt:coil:$coil_version"
+
+    // Dependencies for local unit tests
+    def androidXTestVersion = "1.1.2"
+    def junitVersion = "4.13"
+    def legacy_version = "1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:$legacy_version"
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidXTestVersion"
+    androidTestImplementation "androidx.test:core:$androidXTestVersion"
+
+    // Unit Tests
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-all:1.10.19'
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'
+    testImplementation 'org.powermock:powermock-module-junit4:1.6.2'
+    testImplementation 'org.powermock:powermock-api-mockito:1.6.2'
+
+}

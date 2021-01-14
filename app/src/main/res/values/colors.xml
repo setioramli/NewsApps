@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#07617d</color>
+    <color name="colorPrimaryDark">#26617F</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlue">#377ed0</color>
+    <color name="statusBarColor">#01574c</color>
+    <color name="colorYellow">#ffbe26</color>
+    <color name="colorGrey">#B2B2B2</color>
+    <color name="colorBlack">#000000</color>
+    <color name="whiteDarker">#dddddd</color>
+
+    <color name="colorPrimaryLight">#097b9e</color>
+    <color name="colorAccent">#26617F</color>
+    <color name="colorBackground">#F5F7F9</color>
+</resources>

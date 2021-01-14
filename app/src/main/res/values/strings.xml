@@ -1,0 +1,19 @@
+<resources>
+    <string name="search">Search</string>
+
+    <!--Categories-->
+    <string name="general">General</string>
+    <string name="bussiness">Bussiness</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="categories">Categories</string>
+    <string name="welcome">Welcome</string>
+    <string name="back">Back</string>
+    <string name="news_source">News Source</string>
+    <string name="no_data">Data kosong</string>
+    <string name="unknown_source">Unknown Source</string>
+    <string name="article">Article</string>
+</resources>
