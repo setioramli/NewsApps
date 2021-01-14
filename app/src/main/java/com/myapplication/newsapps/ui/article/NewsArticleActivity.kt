@@ -114,7 +114,7 @@ class NewsArticleActivity : BaseActivity<ActivityNewsArticleBinding>(),
                                 initAdapter(response)
                             } else {
 
-                                loadMore(response)
+                                initList(response)
                             }
                         }
                     }
@@ -178,26 +178,4 @@ class NewsArticleActivity : BaseActivity<ActivityNewsArticleBinding>(),
         page++
         lifecycleScope.launch { presenter.presentGetArticleList(category, sourceId, keyword, page) }
     }
-
-    private fun loadMore(list: List<Article>) {
-
-        binding.swipeRefreshLayout.stopRefreshing()
-        listArticle.clear()
-        listArticle.addAll(list)
-        adapter.notifyDataSetChanged()
-        page++
-
-        if (isLoadMore) {
-            isLoadMore = true
-            val duration: Long = 3000
-            Timer().schedule(timerTask {
-                lifecycleScope.launchWhenCreated { presenter.presentGetArticleList(category, sourceId, keyword, page) }
-            }, duration)
-        } else {
-
-            isLoadMore = false
-        }
-    }
-
-
 }

@@ -103,8 +103,8 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>(),
 
                                 initAdapter(response)
                             } else {
-
-                                loadMore(response)
+                                isLoadMore = true
+                                initList(response)
                             }
 
                         }
@@ -136,7 +136,6 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>(),
         binding.progressBar.gone()
         adapter = NewsListAdapter(data, category)
         binding.rvSource.adapter = adapter
-        adapter.notifyDataSetChanged()
         initList(data)
 
     }
@@ -196,25 +195,4 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>(),
         page++
         lifecycleScope.launch { presenter.presentGetListResponse(category, page) }
     }
-
-    private fun loadMore(list: List<Source>) {
-
-        binding.swipeRefreshLayout.stopRefreshing()
-        sourceList.clear()
-        sourceList.addAll(list)
-        adapter.notifyDataSetChanged()
-        page++
-
-        if (isLoadMore) {
-            isLoadMore = true
-            val duration: Long = 3000 // 3Second
-            Timer().schedule(timerTask {
-                lifecycleScope.launch { presenter.presentGetListResponse(category, page) }
-            }, duration)
-
-        } else {
-            isLoadMore = false
-        }
-    }
-
 }
